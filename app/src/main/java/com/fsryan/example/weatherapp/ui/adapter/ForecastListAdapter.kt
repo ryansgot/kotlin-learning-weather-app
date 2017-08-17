@@ -13,7 +13,7 @@ import com.fsryan.example.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
-class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: ForecastListAdapter.OnItemClickListener) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
+class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         operator fun invoke(forecast: Forecast)
@@ -32,7 +32,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: Forecas
 
     override fun getItemCount(): Int  = weekForecast.size()
 
-    class ViewHolder(val view: View, val itemClick: OnItemClickListener) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View, val itemClick: (Forecast) -> Unit) : RecyclerView.ViewHolder(view) {
         private val iconView = view.find<ImageView>(R.id.icon)
         private val dateView = view.find<TextView>(R.id.date)
         private val descriptionView = view.find<TextView>(R.id.description)
@@ -46,7 +46,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: Forecas
                 descriptionView.text = description
                 maxTemperatureView.text = "$high"
                 minTemperatureView.text = "$low"
-                itemView.setOnClickListener({itemClick(this)})
+                itemView.setOnClickListener { itemClick(this) }
             }
         }
     }
