@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.fsryan.example.weatherapp.R
 import com.fsryan.example.weatherapp.domain.model.Forecast
 import com.fsryan.example.weatherapp.domain.model.ForecastList
-import com.fsryan.example.weatherapp.ui.utils.ctx
+import com.fsryan.example.weatherapp.extensions.ctx
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.item_forecast.view.*
@@ -36,7 +36,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = date
+                itemView.date.text ="$date"
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "$low"

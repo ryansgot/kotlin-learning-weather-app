@@ -12,6 +12,7 @@ import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_forecast.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
-            val result = RequestForecastCommand("94043").execute()
+            val result = RequestForecastCommand(94043).execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result) { (date) -> toast(date) }
+                forecastList.adapter = ForecastListAdapter(result, { toast(it.description) })
             }
         }
     }

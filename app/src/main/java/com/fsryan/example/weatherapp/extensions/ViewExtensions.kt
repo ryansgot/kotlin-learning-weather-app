@@ -1,4 +1,4 @@
-package com.fsryan.example.weatherapp.ui.utils
+package com.fsryan.example.weatherapp.extensions
 
 import android.content.Context
 import android.view.View

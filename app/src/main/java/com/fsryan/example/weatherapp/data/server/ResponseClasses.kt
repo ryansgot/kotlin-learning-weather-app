@@ -1,4 +1,4 @@
-package com.fsryan.example.weatherapp.data
+package com.fsryan.example.weatherapp.data.server
 
 // The names of the fields must be the same as the names of the fields in the json
 /*
