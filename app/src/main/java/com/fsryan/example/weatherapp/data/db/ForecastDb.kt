@@ -1,5 +1,6 @@
 package com.fsryan.example.weatherapp.data.db
 
+import com.fsryan.example.weatherapp.domain.datasource.ForecastDataSource
 import com.fsryan.example.weatherapp.domain.model.ForecastList
 import com.fsryan.example.weatherapp.extensions.clear
 import com.fsryan.example.weatherapp.extensions.parseList
@@ -8,10 +9,9 @@ import com.fsryan.example.weatherapp.extensions.toVarargArray
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.insert
 
-class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance, val dataMapper: DbDataMapper) {
+class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance, val dataMapper: DbDataMapper = DbDataMapper()): ForecastDataSource {
 
-
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
                 .whereSimple(dailyRequest, zipCode.toString(), date.toString())
